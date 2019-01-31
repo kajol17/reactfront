@@ -1,26 +1,156 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import{ BrowserRouter as Router,Route} from'react-router-dom';
+import Header from './components/layout/Header';
+import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
+import About from './components/pages/About';
+import Filter from './components/Filter';
+//import uuid from 'uuid';
+import axios from 'axios';
 import './App.css';
 
+
 class App extends Component {
+  state={
+    todos:[],
+    title:[]
+  }
+    
+    /*todos:[
+      {
+        id:uuid.v4(),
+        title:'Take out the trash',
+        completed:false
+
+      },
+      {
+        id:uuid.v4(),
+        title:'Dinner with wife',
+        completed:true
+
+      },
+      {
+        id:uuid.v4(),
+        title:'Meeting with boss',
+        completed:false
+
+      }
+      
+    ]*/
+    /*componentWillMount() {
+      this.setState({
+        todos: this.todos,
+        title: this.todos
+      })
+    }*/
+  
+    componentDidMount()
+    {
+      //axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      //.then(res=>console.log(res.data))
+      axios.get('http://localhost:4003/api')
+      .then(res=>this.setState({todos:res.data,
+      title : res.data }))
+    }
+  
+  //toggle complete
+  markComplete=(id)=>{
+    //console.log(id)
+    axios.put(`http://localhost:4003/api/update/task/${id}`) 
+     .then(res=> {
+      this.setState({todos:this.state.todos.map(todo=>{
+        if(todo.id===id)
+        {
+          todo.isDone=!todo.isDone 
+        }
+        return todo;
+      })
+        });
+     })
+
+  }
+  //delete todo
+  /*delTodo=(id)=>{
+    //console.log(id)
+      this.setState({todos:[...this.state.todos.filter(todo=>todo.id!==id)]});
+  }*/
+  delTodo=(id)=>{
+   // axios.delete('https://jsonplaceholder.typicode.com/todos/${id}')
+   axios.delete(`http://localhost:4003/api/delete/task/${id}`)
+      .then(res=>{
+        this.setState({todos:[...this.state.todos.filter(todo=>todo.id!==id)]});
+        this.title("");
+
+      })
+  }
+  //add todo
+  /*addTodo=(title)=>
+  {
+    //console.log(title);
+    /*const newTodo={
+      id:uuid.v4(),
+      title,
+      completed:false
+    }
+    axios.post('https://jsonplaceholder.typicode.com/todos'{
+      title,
+      completed:false
+    });
+    this.setState({todos:[...this.state.todos,newTodo]});
+}*/
+addTodo=(title)=>
+  {
+    //axios.post('https://jsonplaceholder.typicode.com/todos',{
+      axios.post('http://localhost:4003/api/add/task',{
+      taskName : title
+    })
+    .then(
+      
+      res=> {
+        const newTodo={
+          id: res.data.id,
+          taskName : title,
+          isDone:false
+        }
+        this.setState({todos:[...this.state.todos,newTodo]})
+        this.title("");
+    
+      });
+}
+
+title = (query) => {
+  this.setState({
+    todos:this.state.todos,
+    title: query === "" ? this.state.todos : this.state.todos.filter((todo) => {
+      return todo.taskName.startsWith(query);
+    })
+  })
+
+  console.log(this.state.todos);
+  console.log(this.state.title);
+}
+
+
   render() {
+    //console.log(this.state.todos)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+        <div className="container">
+        <Header/>
+        <Route exact path="/" render={ props=>(
+          <React.Fragment>
+            <AddTodo addTodo={this.addTodo}/>
+            <br/>
+            <Filter onChange={this.title}/>
+            <br/>
+           <Todos todos={this.state.title} markComplete={this.markComplete} delTodo={this.delTodo}  />
+          </React.Fragment>
+        )}/>
+        <Route path="/about" component={About}/>
+        </div>
+        </div>
+      </Router>
     );
   }
 }
