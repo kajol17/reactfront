@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/kajol17/reactfront/precache-manifest.6668ad039ef69af092784b6fc7233b0a.js"
+  "/reactfront/precache-manifest.24b79ec361591e280585b5c00116ac19.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/kajol17/reactfront/index.html", {
+workbox.routing.registerNavigationRoute("/reactfront/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
