@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/kajol17/reactfront/precache-manifest.ee6c13fb1586d85abbef673b40dfd359.js"
+  "/kajol17/reactfront/precache-manifest.6668ad039ef69af092784b6fc7233b0a.js"
 );
 
 workbox.clientsClaim();
