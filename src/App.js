@@ -48,7 +48,9 @@ class App extends Component {
     {
       //axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
       //.then(res=>console.log(res.data))
-      axios.get('http://localhost:4003/api')
+     // axios.get('http://localhost:4003/api')
+     //axios.get(`https://cors-anywhere.herokuapp.com/http://todoapi-api-todo-list.1d35.starter-us-east-1.openshiftapps.com/api`)
+     axios.get(`https://reactapitodo.herokuapp.com/api`)
       .then(res=>this.setState({todos:res.data,
       title : res.data }))
     }
@@ -56,7 +58,10 @@ class App extends Component {
   //toggle complete
   markComplete=(id)=>{
     //console.log(id)
-    axios.put(`http://localhost:4003/api/update/task/${id}`) 
+    //axios.put(`http://localhost:4003/api/update/task/${id}`) 
+
+    axios.put(`https://reactapitodo.herokuapp.com/api/update/task/${id}`)
+    //axios.put(`https://cors-anywhere.herokuapp.com/http://todoapi-api-todo-list.1d35.starter-us-east-1.openshiftapps.com/api/update/task/${id}`)
      .then(res=> {
       this.setState({todos:this.state.todos.map(todo=>{
         if(todo.id===id)
@@ -76,8 +81,11 @@ class App extends Component {
   }*/
   delTodo=(id)=>{
    // axios.delete('https://jsonplaceholder.typicode.com/todos/${id}')
-   axios.delete(`http://localhost:4003/api/delete/task/${id}`)
-      .then(res=>{
+  // axios.delete(`http://localhost:4003/api/delete/task/${id}`)
+   //axios.delete(`https://cors-anywhere.herokuapp.com/http://todoapi-api-todo-list.1d35.starter-us-east-1.openshiftapps.com/api/delete/task/${id}`)
+   axios.delete(`https://reactapitodo.herokuapp.com/api/delete/task/${id}`)
+    
+   .then(res=>{
         this.setState({todos:[...this.state.todos.filter(todo=>todo.id!==id)]});
         this.title("");
 
@@ -101,8 +109,10 @@ class App extends Component {
 addTodo=(title)=>
   {
     //axios.post('https://jsonplaceholder.typicode.com/todos',{
-      axios.post('http://localhost:4003/api/add/task',{
-      taskName : title
+      //axios.post('http://localhost:4003/api/add/task',{
+        //axios.post(`https://cors-anywhere.herokuapp.com/http://todoapi-api-todo-list.1d35.starter-us-east-1.openshiftapps.com/api/add/task`,{
+          axios.post(`https://reactapitodo.herokuapp.com/api/add/task`,{
+        taskName : title
     })
     .then(
       
@@ -134,7 +144,7 @@ title = (query) => {
   render() {
     //console.log(this.state.todos)
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div className="App">
         <div className="container">
         <Header/>
