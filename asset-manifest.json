@@ -1,13 +1,13 @@
 {
   "main.css": "/reactfront/static/css/main.0d2c4e54.chunk.css",
-  "main.js": "/reactfront/static/js/main.4a79bccf.chunk.js",
-  "main.js.map": "/reactfront/static/js/main.4a79bccf.chunk.js.map",
+  "main.js": "/reactfront/static/js/main.b6536230.chunk.js",
+  "main.js.map": "/reactfront/static/js/main.b6536230.chunk.js.map",
   "static/js/1.9227a8a1.chunk.js": "/reactfront/static/js/1.9227a8a1.chunk.js",
   "static/js/1.9227a8a1.chunk.js.map": "/reactfront/static/js/1.9227a8a1.chunk.js.map",
   "runtime~main.js": "/reactfront/static/js/runtime~main.e5c0c506.js",
   "runtime~main.js.map": "/reactfront/static/js/runtime~main.e5c0c506.js.map",
   "static/css/main.0d2c4e54.chunk.css.map": "/reactfront/static/css/main.0d2c4e54.chunk.css.map",
   "index.html": "/reactfront/index.html",
-  "precache-manifest.6af0249d10f0e7d9ac94e9b9f674a628.js": "/reactfront/precache-manifest.6af0249d10f0e7d9ac94e9b9f674a628.js",
+  "precache-manifest.696c780cb5d0c210e51cb9579ad4ccf6.js": "/reactfront/precache-manifest.696c780cb5d0c210e51cb9579ad4ccf6.js",
   "service-worker.js": "/reactfront/service-worker.js"
 }
